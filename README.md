@@ -1,66 +1,61 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+arkdown
+# Clone dan Setup Project Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 1. Clone Repository
 
-## About Laravel
+Hal pertama yang harus dilakukan adalah melakukan clone ke repositori target. Pastikan Anda sudah menginstall Git di mesin lokal dan memiliki akses (minimal Read) terhadap repositori target.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Contoh Clone dari GitHub
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Jika Anda telah melakukan setup SSH Key di Git lokal dan GitHub, Anda dapat menggunakan metode SSH. Jika belum, gunakan metode HTTPS.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Gunakan terminal untuk menjalankan perintah berikut:
+bash
+git clone git@github.com:showcheap/laravel-apitoken.git
+Output yang diharapkan:
+Cloning into 'laravel-apitoken'...
+remote: Counting objects: 128, done.
+remote: Total 128 (delta 0), reused 0 (delta 0), pack-reused 128
+Receiving objects: 100% (128/128), 165.48 KiB | 288.00 KiB/s, done.
+Resolving deltas: 100% (16/16), done.
+## 2. Install Dependency
 
-## Learning Laravel
+Dependency adalah sekumpulan library yang dibutuhkan oleh aplikasi Laravel kita, termasuk framework Laravel itu sendiri. List dependency dapat dilihat pada berkas `composer.json`.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Untuk menginstall semua dependency, jalankan perintah berikut:
+bash
+composer install
+Composer akan melakukan penelusuran dependency yang dibutuhkan aplikasi, lalu mengunduhnya ke dalam folder `vendor`. Proses ini mungkin memakan waktu tergantung koneksi internet dan cache Composer.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Output yang diharapkan:
+Loading composer repositories with package information
+Installing dependencies (including require-dev) from lock file
+Package operations: 59 installs, 0 updates, 0 removals
+  - Installing doctrine/inflector (v1.1.0): Downloading (100%)
+  - Installing erusev/parsedown (1.6.1): Downloading (100%)
+  ...
+## 3. Setup Environment Variable
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Setelah proses `composer install` selesai, kita perlu membuat file `.env` di folder aplikasi kita. Biasanya sudah ada file sampelnya, cukup salin file tersebut:
+bash
+cp .env.example .env
+Isi semua pengaturan yang perlu dimasukkan, terutama pengaturan koneksi database.
 
-## Laravel Sponsors
+### Penting: App Key
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Jika dalam file `.env` yang disalin belum memiliki `APP_KEY`, Anda mungkin akan mendapatkan error. Solusinya, jalankan perintah berikut di terminal:
+bash
+php artisan key:generate
+## 4. Migrate & Seed
 
-### Premium Partners
+Langkah selanjutnya adalah melakukan migrate dan seed dengan menjalankan perintah berikut:
+bash
+php artisan migrate --seed
+## 5. Jalankan Local Dev Server
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Setelah semua langkah di atas berhasil, jalankan server lokal dengan perintah:
+bash
+php artisan serve
+## Selesai
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Selamat mencoba! 😁👏
