@@ -37,7 +37,7 @@ class CategoryController extends Controller
         $this->validate($request, [
             'name' => 'required|max:220',
         ]);
-    
+    // 
         //melakkukan save to database
         Category::create([
             'name' => $request->name,
