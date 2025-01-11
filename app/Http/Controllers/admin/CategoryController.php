@@ -38,6 +38,7 @@ class CategoryController extends Controller
             'name' => 'required|max:220',
         ]);
     // 
+    //
         //melakkukan save to database
         Category::create([
             'name' => $request->name,
